@@ -38,8 +38,8 @@ export default function About() {
           <div ref={sectionRef} className="fade-up relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
               <img
-                src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=800&q=80"
-                alt="Colin — Founder of Aota Media"
+                src="/images/colin-cutout.png"
+                alt="Colin — Founder of Aota Media, with DJI Ronin gimbal"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />

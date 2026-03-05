@@ -1,22 +1,30 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useScrollObserver } from '../hooks/useScrollObserver'
 
-const FILTERS = ['All', 'Photos', 'Headshots', 'Logos']
+const FILTERS = ['All', 'Photos', 'Videos']
 
-// Placeholder portfolio items — replace src with real Google Drive / CDN URLs
 const portfolioItems = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', category: 'Photos', alt: 'Luxury home exterior', aspect: 'tall' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', category: 'Photos', alt: 'Modern living room', aspect: 'wide' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&q=80', category: 'Photos', alt: 'Kitchen interior', aspect: 'square' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80', category: 'Photos', alt: 'Master bedroom', aspect: 'wide' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80', category: 'Photos', alt: 'Pool and backyard', aspect: 'tall' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80', category: 'Photos', alt: 'Contemporary exterior', aspect: 'square' },
-  { id: 7, src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80', category: 'Headshots', alt: 'Professional headshot', aspect: 'square' },
-  { id: 8, src: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80', category: 'Headshots', alt: 'Real estate agent headshot', aspect: 'tall' },
-  { id: 9, src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80', category: 'Headshots', alt: 'Corporate headshot', aspect: 'square' },
-  { id: 10, src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', category: 'Logos', alt: 'Brand logo design', aspect: 'wide' },
-  { id: 11, src: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&q=80', category: 'Logos', alt: 'Real estate logo', aspect: 'square' },
-  { id: 12, src: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80', category: 'Photos', alt: 'Bathroom interior', aspect: 'tall' },
+  // Jordan Page — Photos
+  { id: 1,  src: '/images/jordan-kitchen-1.jpg',  category: 'Photos', alt: 'Jordan Page kitchen' },
+  { id: 2,  src: '/images/jordan-pool-sunset.jpg', category: 'Photos', alt: 'Jordan Page pool at sunset' },
+  { id: 3,  src: '/images/jordan-living.jpg',      category: 'Photos', alt: 'Jordan Page living room' },
+  { id: 4,  src: '/images/jordan-dining.jpg',      category: 'Photos', alt: 'Jordan Page dining room' },
+  { id: 5,  src: '/images/jordan-kitchen-2.jpg',   category: 'Photos', alt: 'Jordan Page kitchen and dining' },
+  { id: 6,  src: '/images/jordan-pool-2.jpg',      category: 'Photos', alt: 'Jordan Page pool view' },
+  { id: 7,  src: '/images/jordan-patio-1.jpg',     category: 'Photos', alt: 'Jordan Page patio' },
+  { id: 8,  src: '/images/jordan-patio-2.jpg',     category: 'Photos', alt: 'Jordan Page outdoor living' },
+  { id: 9,  src: '/images/jordan-staircase.jpg',   category: 'Photos', alt: 'Jordan Page interior overview' },
+  { id: 10, src: '/images/jordan-patio-3.jpg',     category: 'Photos', alt: 'Jordan Page backyard sunset' },
+  // Josh AirBnB — Photos
+  { id: 11, src: '/images/josh-pool.jpg',          category: 'Photos', alt: 'Josh AirBnB pool at night' },
+  { id: 12, src: '/images/josh-living-1.jpg',      category: 'Photos', alt: 'Josh AirBnB living room' },
+  { id: 13, src: '/images/josh-living-2.jpg',      category: 'Photos', alt: 'Josh AirBnB fireplace' },
+  // Videos
+  { id: 14, type: 'video', src: '/videos/jordan-page.mp4',    poster: '/images/jordan-pool-sunset.jpg', category: 'Videos', alt: 'Jordan Page Reel' },
+  { id: 15, type: 'video', src: '/videos/josh-airbnb.mp4',    poster: '/images/josh-pool.jpg',          category: 'Videos', alt: 'Josh AirBnB Reel' },
+  { id: 16, type: 'video', src: '/videos/elizabeth-reel.mp4', poster: '/images/staircase.jpg',          category: 'Videos', alt: 'Elizabeth Reel' },
+  { id: 17, type: 'video', src: '/videos/daniel-reel.mp4',    poster: '/images/kitchen.jpg',            category: 'Videos', alt: 'Daniel Reel' },
+  { id: 18, type: 'video', src: '/videos/2ahead.mp4',         poster: '/images/staircase.jpg',          category: 'Videos', alt: '2 Ahead Reel' },
 ]
 
 const INITIAL_SHOW = 9
@@ -52,12 +60,27 @@ function LightboxModal({ item, onClose, onPrev, onNext }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-      <img
-        src={item.src}
-        alt={item.alt}
-        className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
-        onClick={(e) => e.stopPropagation()}
-      />
+
+      {item.type === 'video' ? (
+        <video
+          key={item.src}
+          controls
+          autoPlay
+          poster={item.poster}
+          className="max-h-[85vh] max-w-[90vw] rounded-lg"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <source src={item.src} type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          src={item.src}
+          alt={item.alt}
+          className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+          onClick={(e) => e.stopPropagation()}
+        />
+      )}
+
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2 transition-colors"
         onClick={(e) => { e.stopPropagation(); onNext() }}
@@ -103,14 +126,14 @@ export default function Portfolio() {
         </div>
 
         {/* Video showreel */}
-        <div className="fade-up mb-16 rounded-2xl overflow-hidden shadow-xl aspect-video max-w-4xl mx-auto">
-          <iframe
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1&controls=1&rel=0"
-            title="Aota Media Showreel"
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+        <div className="mb-16 rounded-2xl overflow-hidden shadow-xl aspect-video max-w-4xl mx-auto">
+          <video
+            controls
+            poster="/images/jordan-kitchen-1.jpg"
+            className="w-full h-full object-cover"
+          >
+            <source src="/videos/main-reel.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* Filter tabs */}
@@ -138,17 +161,33 @@ export default function Portfolio() {
               className="break-inside-avoid group relative overflow-hidden rounded-xl cursor-pointer"
               onClick={() => openLightbox(item)}
             >
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+              {item.type === 'video' ? (
+                <video
+                  src={item.src}
+                  poster={item.poster}
+                  muted
+                  playsInline
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : (
+                <img
+                  src={item.src}
+                  alt={item.alt}
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              )}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
+                  {item.type === 'video' ? (
+                    <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  ) : (
+                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                  )}
                 </div>
               </div>
               <span className="absolute top-3 right-3 bg-white/90 text-text-secondary text-xs font-medium px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">

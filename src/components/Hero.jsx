@@ -1,53 +1,23 @@
-import { useState, useEffect } from 'react'
 import { ARYEO_BOOKING_URL } from '../config'
 
-// Placeholder hero images — swap with real property photos
-const heroSlides = [
-  {
-    url: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=85',
-    alt: 'Luxury home exterior at dusk',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=85',
-    alt: 'Modern living room interior',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1920&q=85',
-    alt: 'Contemporary home with pool',
-  },
-]
-
 export default function Hero() {
-  const [current, setCurrent] = useState(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % heroSlides.length)
-    }, 5000)
-    return () => clearInterval(timer)
-  }, [])
-
   return (
     <section
       id="hero"
       className="relative h-screen min-h-[600px] overflow-hidden flex items-center justify-center"
     >
-      {/* Photo carousel */}
-      {heroSlides.map((slide, i) => (
-        <div
-          key={i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === current ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <img
-            src={slide.url}
-            alt={slide.alt}
-            className="w-full h-full object-cover"
-            loading={i === 0 ? 'eager' : 'lazy'}
-          />
-        </div>
-      ))}
+      {/* Fullscreen video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster="/images/kitchen.jpg"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ pointerEvents: 'none' }}
+      >
+        <source src="/videos/main-reel.mp4" type="video/mp4" />
+      </video>
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
@@ -81,20 +51,6 @@ export default function Hero() {
           >
             See Our Work ↓
           </a>
-        </div>
-
-        {/* Slide dots */}
-        <div className="flex gap-2 justify-center mt-12">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrent(i)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === current ? 'bg-gold w-6' : 'bg-white/50 hover:bg-white/80'
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
         </div>
       </div>
 
