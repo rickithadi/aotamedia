@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useScrollObserver } from '../hooks/useScrollObserver'
 
-const FILTERS = ['All', 'Photos', 'Videos']
+const FILTERS = ['All', 'Photos']
 
 const portfolioItems = [
   // Jordan Page — Photos
@@ -19,12 +19,6 @@ const portfolioItems = [
   { id: 11, src: '/images/josh-pool.jpg',          category: 'Photos', alt: 'Josh AirBnB pool at night' },
   { id: 12, src: '/images/josh-living-1.jpg',      category: 'Photos', alt: 'Josh AirBnB living room' },
   { id: 13, src: '/images/josh-living-2.jpg',      category: 'Photos', alt: 'Josh AirBnB fireplace' },
-  // Videos
-  { id: 14, type: 'video', src: '/videos/jordan-page.mp4',    poster: '/images/jordan-pool-sunset.jpg', category: 'Videos', alt: 'Jordan Page Reel' },
-  { id: 15, type: 'video', src: '/videos/josh-airbnb.mp4',    poster: '/images/josh-pool.jpg',          category: 'Videos', alt: 'Josh AirBnB Reel' },
-  { id: 16, type: 'video', src: '/videos/elizabeth-reel.mp4', poster: '/images/staircase.jpg',          category: 'Videos', alt: 'Elizabeth Reel' },
-  { id: 17, type: 'video', src: '/videos/daniel-reel.mp4',    poster: '/images/kitchen.jpg',            category: 'Videos', alt: 'Daniel Reel' },
-  { id: 18, type: 'video', src: '/videos/2ahead.mp4',         poster: '/images/staircase.jpg',          category: 'Videos', alt: '2 Ahead Reel' },
 ]
 
 const INITIAL_SHOW = 9
@@ -61,25 +55,12 @@ function LightboxModal({ item, onClose, onPrev, onNext }) {
         </svg>
       </button>
 
-      {item.type === 'video' ? (
-        <video
-          key={item.src}
-          controls
-          autoPlay
-          poster={item.poster}
-          className="max-h-[85vh] max-w-[90vw] rounded-lg"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <source src={item.src} type="video/mp4" />
-        </video>
-      ) : (
-        <img
+      <img
           src={item.src}
           alt={item.alt}
           className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
           onClick={(e) => e.stopPropagation()}
         />
-      )}
 
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2 transition-colors"
@@ -125,17 +106,6 @@ export default function Portfolio() {
           </p>
         </div>
 
-        {/* Video showreel */}
-        <div className="mb-16 rounded-2xl overflow-hidden shadow-xl aspect-video max-w-4xl mx-auto">
-          <video
-            controls
-            poster="/images/jordan-kitchen-1.jpg"
-            className="w-full h-full object-cover"
-          >
-            <source src="/videos/main-reel.mp4" type="video/mp4" />
-          </video>
-        </div>
-
         {/* Filter tabs */}
         <div className="flex flex-wrap gap-3 justify-center mb-10">
           {FILTERS.map((filter) => (
@@ -161,33 +131,17 @@ export default function Portfolio() {
               className="break-inside-avoid group relative overflow-hidden rounded-xl cursor-pointer"
               onClick={() => openLightbox(item)}
             >
-              {item.type === 'video' ? (
-                <video
-                  src={item.src}
-                  poster={item.poster}
-                  muted
-                  playsInline
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              ) : (
-                <img
+              <img
                   src={item.src}
                   alt={item.alt}
                   className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-              )}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {item.type === 'video' ? (
-                    <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  ) : (
                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                     </svg>
-                  )}
                 </div>
               </div>
               <span className="absolute top-3 right-3 bg-white/90 text-text-secondary text-xs font-medium px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
