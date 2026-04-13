@@ -246,7 +246,17 @@ function PriceCard({ pkg, bookingUrl }) {
 
 export default function Pricing() {
   const [activeService, setActiveService] = useState('Photos')
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const sectionRef = useScrollObserver()
+
+  const handleServiceChange = (service) => {
+    if (service === activeService) return
+    setIsTransitioning(true)
+    setTimeout(() => {
+      setActiveService(service)
+      setIsTransitioning(false)
+    }, 160)
+  }
 
   return (
     <section id="pricing" className="py-24 px-6 bg-bg-warm">
@@ -264,7 +274,7 @@ export default function Pricing() {
           {SERVICES.map((service) => (
             <button
               key={service}
-              onClick={() => setActiveService(service)}
+              onClick={() => handleServiceChange(service)}
               className={`font-body font-medium px-6 py-3 rounded-full border-2 transition-all duration-200 text-sm ${
                 activeService === service
                   ? 'bg-gold border-gold text-white shadow-lg shadow-gold/25 scale-105'
@@ -276,8 +286,11 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* Package cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-300">
+        {/* Package cards — fade transition on tab switch */}
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-opacity duration-150"
+          style={{ opacity: isTransitioning ? 0 : 1 }}
+        >
           {pricingData[activeService].map((pkg) => (
             <PriceCard key={pkg.name} pkg={pkg} bookingUrl={ARYEO_BOOKING_URL} />
           ))}

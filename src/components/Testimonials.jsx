@@ -59,9 +59,16 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="py-24 bg-bg-warm overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <div ref={sectionRef} className="fade-up text-center mb-12">
-          <p className="section-eyebrow mb-3">Reviews</p>
-          <h2 className="section-title mb-4">What Agents Are Saying</h2>
+
+        {/* Featured pull quote — replaces the generic eyebrow+title */}
+        <div ref={sectionRef} className="fade-up mb-12">
+          <p className="section-eyebrow mb-5">What Agents Are Saying</p>
+          <blockquote className="font-display font-semibold text-3xl md:text-5xl text-text-primary leading-tight max-w-3xl mb-3">
+            "Sold in 3 days, 15% over asking."
+          </blockquote>
+          <cite className="font-body text-text-secondary not-italic text-sm">
+            — Sarah M., Realtor, Realty ONE Group
+          </cite>
         </div>
 
         <div className="relative">
@@ -76,10 +83,13 @@ export default function Testimonials() {
             </svg>
           </button>
 
+          {/* Gradient fade — right edge peek */}
+          <div className="absolute right-0 top-0 bottom-4 w-16 md:w-24 bg-gradient-to-l from-bg-warm to-transparent z-10 pointer-events-none" />
+
           {/* Card strip */}
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+            className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {testimonials.map((t, i) => (
@@ -109,6 +119,11 @@ export default function Testimonials() {
             </svg>
           </button>
         </div>
+
+        {/* Mobile swipe hint */}
+        <p className="md:hidden text-center text-text-secondary/50 text-xs font-body mt-3 tracking-wide">
+          swipe for more →
+        </p>
       </div>
     </section>
   )

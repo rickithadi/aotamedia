@@ -68,6 +68,22 @@
   background: #C9973A;
 }
 
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce {
+    animation: none;
+  }
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Lightbox overlay */
 .lightbox-overlay {
   position: fixed;

@@ -7,7 +7,6 @@ export default function CTABanner() {
   return (
     <section className="py-24 px-6 bg-gold-light border-t border-b border-gold/20">
       <div ref={sectionRef} className="fade-up max-w-3xl mx-auto text-center">
-        <p className="section-eyebrow mb-4">Get Started</p>
         <h2 className="font-display font-bold text-4xl md:text-6xl text-text-primary leading-tight mb-6">
           Ready to make your
           <br />

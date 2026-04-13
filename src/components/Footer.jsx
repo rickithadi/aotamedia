@@ -121,7 +121,7 @@ export default function Footer() {
 
         <div className="border-t border-border pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-body text-text-secondary text-sm">
-            © 2025 Aota Media · Phoenix, AZ
+            © 2026 Aota Media · Phoenix, AZ
           </p>
           <p className="font-body text-text-secondary text-xs">
             All rights reserved.

@@ -7,12 +7,13 @@ import About from './components/About'
 import Testimonials from './components/Testimonials'
 import CTABanner from './components/CTABanner'
 import Footer from './components/Footer'
+import MobileBookBar from './components/MobileBookBar'
 
 export default function App() {
   return (
     <div className="min-h-screen bg-bg-warm">
       <Nav />
-      <main>
+      <main className="pb-20 md:pb-0">
         <Hero />
         <Portfolio />
         <Services />
@@ -22,6 +23,7 @@ export default function App() {
         <CTABanner />
       </main>
       <Footer />
+      <MobileBookBar />
     </div>
   )
 }

@@ -1,29 +1,34 @@
 import { useState, useEffect } from 'react'
 import { useScrollObserver } from '../hooks/useScrollObserver'
 
-const FILTERS = ['All', 'Photos']
+const FILTERS = ['All', 'Photos', 'Videos']
 
 const portfolioItems = [
   // Jordan Page — Photos
-  { id: 1,  src: '/images/jordan-kitchen-1.jpg',  category: 'Photos', alt: 'Jordan Page kitchen' },
-  { id: 2,  src: '/images/jordan-pool-sunset.jpg', category: 'Photos', alt: 'Jordan Page pool at sunset' },
-  { id: 3,  src: '/images/jordan-living.jpg',      category: 'Photos', alt: 'Jordan Page living room' },
-  { id: 4,  src: '/images/jordan-dining.jpg',      category: 'Photos', alt: 'Jordan Page dining room' },
-  { id: 5,  src: '/images/jordan-kitchen-2.jpg',   category: 'Photos', alt: 'Jordan Page kitchen and dining' },
-  { id: 6,  src: '/images/jordan-pool-2.jpg',      category: 'Photos', alt: 'Jordan Page pool view' },
-  { id: 7,  src: '/images/jordan-patio-1.jpg',     category: 'Photos', alt: 'Jordan Page patio' },
-  { id: 8,  src: '/images/jordan-patio-2.jpg',     category: 'Photos', alt: 'Jordan Page outdoor living' },
-  { id: 9,  src: '/images/jordan-staircase.jpg',   category: 'Photos', alt: 'Jordan Page interior overview' },
-  { id: 10, src: '/images/jordan-patio-3.jpg',     category: 'Photos', alt: 'Jordan Page backyard sunset' },
+  { id: 1,  type: 'photo', src: '/images/jordan-kitchen-1.jpg',  category: 'Photos', alt: 'Jordan Page kitchen' },
+  { id: 2,  type: 'photo', src: '/images/jordan-pool-sunset.jpg', category: 'Photos', alt: 'Jordan Page pool at sunset' },
+  { id: 3,  type: 'photo', src: '/images/jordan-living.jpg',      category: 'Photos', alt: 'Jordan Page living room' },
+  { id: 4,  type: 'photo', src: '/images/jordan-dining.jpg',      category: 'Photos', alt: 'Jordan Page dining room' },
+  { id: 5,  type: 'photo', src: '/images/jordan-kitchen-2.jpg',   category: 'Photos', alt: 'Jordan Page kitchen and dining' },
+  { id: 6,  type: 'photo', src: '/images/jordan-pool-2.jpg',      category: 'Photos', alt: 'Jordan Page pool view' },
+  { id: 7,  type: 'photo', src: '/images/jordan-patio-1.jpg',     category: 'Photos', alt: 'Jordan Page patio' },
+  { id: 8,  type: 'photo', src: '/images/jordan-patio-2.jpg',     category: 'Photos', alt: 'Jordan Page outdoor living' },
+  { id: 9,  type: 'photo', src: '/images/jordan-staircase.jpg',   category: 'Photos', alt: 'Jordan Page interior overview' },
+  { id: 10, type: 'photo', src: '/images/jordan-patio-3.jpg',     category: 'Photos', alt: 'Jordan Page backyard sunset' },
   // Josh AirBnB — Photos
-  { id: 11, src: '/images/josh-pool.jpg',          category: 'Photos', alt: 'Josh AirBnB pool at night' },
-  { id: 12, src: '/images/josh-living-1.jpg',      category: 'Photos', alt: 'Josh AirBnB living room' },
-  { id: 13, src: '/images/josh-living-2.jpg',      category: 'Photos', alt: 'Josh AirBnB fireplace' },
+  { id: 11, type: 'photo', src: '/images/josh-pool.jpg',          category: 'Photos', alt: 'Josh AirBnB pool at night' },
+  { id: 12, type: 'photo', src: '/images/josh-living-1.jpg',      category: 'Photos', alt: 'Josh AirBnB living room' },
+  { id: 13, type: 'photo', src: '/images/josh-living-2.jpg',      category: 'Photos', alt: 'Josh AirBnB fireplace' },
+  // Videos
+  { id: 14, type: 'video', src: '/videos/main-reel.mp4',      poster: '/images/kitchen.jpg',           category: 'Videos', alt: 'Aota Media main showreel' },
+  { id: 15, type: 'video', src: '/videos/daniel-reel.mp4',    poster: '/images/josh-pool.jpg',         category: 'Videos', alt: 'Daniel property reel' },
+  { id: 16, type: 'video', src: '/videos/elizabeth-reel.mp4', poster: '/images/staircase.jpg',         category: 'Videos', alt: 'Elizabeth property reel' },
+  { id: 17, type: 'video', src: '/videos/2ahead.mp4',         poster: '/images/jordan-pool-sunset.jpg', category: 'Videos', alt: '2Ahead property showcase' },
 ]
 
 const INITIAL_SHOW = 9
 
-function LightboxModal({ item, onClose, onPrev, onNext }) {
+function LightboxModal({ item, index, total, onClose, onPrev, onNext }) {
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'Escape') onClose()
@@ -45,6 +50,7 @@ function LightboxModal({ item, onClose, onPrev, onNext }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
+
       <button
         className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2 transition-colors"
         onClick={(e) => { e.stopPropagation(); onPrev() }}
@@ -55,12 +61,24 @@ function LightboxModal({ item, onClose, onPrev, onNext }) {
         </svg>
       </button>
 
-      <img
+      {item.type === 'video' ? (
+        <video
+          key={item.src}
+          src={item.src}
+          poster={item.poster}
+          controls
+          autoPlay
+          className="max-h-[85vh] max-w-[90vw] rounded-lg"
+          onClick={(e) => e.stopPropagation()}
+        />
+      ) : (
+        <img
           src={item.src}
           alt={item.alt}
           className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
           onClick={(e) => e.stopPropagation()}
         />
+      )}
 
       <button
         className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2 transition-colors"
@@ -71,6 +89,11 @@ function LightboxModal({ item, onClose, onPrev, onNext }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
         </svg>
       </button>
+
+      {/* Position counter */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm font-body tracking-widest">
+        {index + 1} / {total}
+      </div>
     </div>
   )
 }
@@ -97,17 +120,18 @@ export default function Portfolio() {
   return (
     <section id="portfolio" className="py-24 px-6 bg-bg-warm">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div ref={sectionRef} className="fade-up text-center mb-16">
-          <p className="section-eyebrow mb-3">Portfolio</p>
-          <h2 className="section-title mb-4">Our Work</h2>
-          <p className="font-body text-text-secondary text-lg max-w-xl mx-auto">
+        {/* Left-aligned — no eyebrow, confident display heading */}
+        <div ref={sectionRef} className="fade-up mb-12">
+          <h2 className="font-display font-semibold text-5xl md:text-7xl text-text-primary leading-none mb-4">
+            Our Work
+          </h2>
+          <p className="font-body text-text-secondary text-lg max-w-md">
             Every image tells a story. Every frame sells a home.
           </p>
         </div>
 
-        {/* Filter tabs */}
-        <div className="flex flex-wrap gap-3 justify-center mb-10">
+        {/* Filter tabs — left-aligned to match header */}
+        <div className="flex flex-wrap gap-3 mb-10">
           {FILTERS.map((filter) => (
             <button
               key={filter}
@@ -132,21 +156,37 @@ export default function Portfolio() {
               onClick={() => openLightbox(item)}
             >
               <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
+                src={item.type === 'video' ? item.poster : item.src}
+                alt={item.alt}
+                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {item.type === 'video' ? (
+                    <svg className="w-14 h-14" viewBox="0 0 56 56" fill="none">
+                      <circle cx="28" cy="28" r="28" fill="rgba(0,0,0,0.55)" />
+                      <path d="M22 19l16 9-16 9V19z" fill="white" />
+                    </svg>
+                  ) : (
                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                     </svg>
+                  )}
                 </div>
               </div>
-              <span className="absolute top-3 right-3 bg-white/90 text-text-secondary text-xs font-medium px-2.5 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                {item.category}
-              </span>
+
+              {/* Video badge — always visible */}
+              {item.type === 'video' && (
+                <span className="absolute bottom-3 left-3 bg-black/65 text-white text-xs font-body font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+                  <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="currentColor">
+                    <path d="M2 2l8 4-8 4V2z" />
+                  </svg>
+                  Video
+                </span>
+              )}
             </div>
           ))}
         </div>
@@ -168,6 +208,8 @@ export default function Portfolio() {
       {lightbox !== null && (
         <LightboxModal
           item={filtered[lightbox]}
+          index={lightbox}
+          total={filtered.length}
           onClose={closeLightbox}
           onPrev={prevLightbox}
           onNext={nextLightbox}

@@ -4,6 +4,15 @@ const badges = [
   {
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    label: '500+ Properties Shot',
+  },
+  {
+    icon: (
+      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
@@ -28,14 +37,15 @@ const badges = [
 ]
 
 export default function About() {
-  const sectionRef = useScrollObserver()
+  const photoRef = useScrollObserver()
+  const textRef = useScrollObserver()
 
   return (
     <section id="about" className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Photo side */}
-          <div ref={sectionRef} className="fade-up relative">
+          <div ref={photoRef} className="fade-up relative">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-w-md mx-auto lg:mx-0">
               <img
                 src="/images/colin-cutout.png"
@@ -46,16 +56,10 @@ export default function About() {
               {/* Decorative gold accent */}
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gold-light rounded-2xl -z-10" />
             </div>
-
-            {/* Floating stat card */}
-            <div className="absolute bottom-8 -right-4 lg:right-0 bg-white rounded-xl shadow-xl border border-border px-6 py-4 hidden sm:block">
-              <p className="font-display font-bold text-3xl text-text-primary">500+</p>
-              <p className="font-body text-text-secondary text-sm">Properties Photographed</p>
-            </div>
           </div>
 
-          {/* Text side */}
-          <div className="fade-up">
+          {/* Text side — now properly animated */}
+          <div ref={textRef} className="fade-up">
             <p className="section-eyebrow mb-4">About</p>
             <h2 className="section-title mb-6">
               Real Estate Media,
@@ -70,7 +74,7 @@ export default function About() {
                 I started Aota Media because I saw too many listings with dark, blurry photos that failed to do justice to beautiful homes. Great photography isn't just aesthetics — it's the difference between a listing that sits and one that sells.
               </p>
               <p>
-                With fast 24-hour turnaround, licensed drone capabilities, and a genuine love for this craft, I'm here to make your next listing shine.
+                With a genuine love for this craft, I'm here to make your next listing shine.
               </p>
             </div>
 
