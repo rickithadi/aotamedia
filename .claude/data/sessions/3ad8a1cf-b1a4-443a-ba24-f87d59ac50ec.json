@@ -2,6 +2,10 @@
   "session_id": "3ad8a1cf-b1a4-443a-ba24-f87d59ac50ec",
   "prompts": [
     "the thumbnails for the videos are not accurate",
-    "/critique"
+    "/critique",
+    "run them all at once",
+    "/Users/hadi.rickit/dev/aotamedia/src/components/Testimonials.jsx:26:24\n\n24 |      name: 'Mark T.',\n25 |      role: 'Independent Agent',\n26 |      headline: 'Photos I'm finally proud to use.',\n   |                          ^\n27 |      quote: \"The headshot session was so relaxed and fun. Highly recommend to any agent.\",\n28 |    },",
+    "the about section does not have an image, provide a recommendation",
+    "option 4"
   ]
 }

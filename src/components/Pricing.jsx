@@ -239,6 +239,9 @@ function PriceCard({ pkg, bookingUrl }) {
         >
           Book This Package →
         </a>
+        <p className="text-center font-body text-text-secondary/60 text-xs mt-2">
+          No payment required to schedule
+        </p>
       </div>
     </div>
   )
@@ -269,8 +272,15 @@ export default function Pricing() {
           </p>
         </div>
 
+        {/* Recommendation nudge */}
+        <p className="text-center font-body text-text-secondary text-sm mt-6 mb-2">
+          Most Phoenix agents start with{' '}
+          <span className="text-text-primary font-medium">Standard Photos</span>
+          {' '}— add Video for listings over $500k.
+        </p>
+
         {/* Service bubbles */}
-        <div className="flex flex-wrap gap-3 justify-center mb-12 mt-8">
+        <div className="flex flex-wrap gap-3 justify-center mb-12 mt-4">
           {SERVICES.map((service) => (
             <button
               key={service}

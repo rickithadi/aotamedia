@@ -5,46 +5,34 @@ const testimonials = [
   {
     name: 'Sarah M.',
     role: 'Realtor, Realty ONE Group',
-    quote: 'Colin delivered absolutely stunning photos of my listing within 24 hours. The quality blew my clients away — the home sold in 3 days, 15% over asking.',
-    stars: 5,
+    headline: 'Sold in 3 days, 15% over asking.',
+    quote: 'Colin delivered absolutely stunning photos of my listing within 24 hours. The quality blew my clients away.',
   },
   {
     name: 'James R.',
     role: 'Real Estate Investor',
-    quote: "The video tour Aota Media produced felt like something out of a luxury magazine. Worth every penny. My listings now consistently get more showings than the competition.",
-    stars: 5,
+    headline: 'More showings than the competition.',
+    quote: 'The video tour felt like something out of a luxury magazine. Worth every penny.',
   },
   {
     name: 'Diana K.',
     role: 'Broker Associate, Coldwell Banker',
-    quote: "Fast, professional, and the results speak for themselves. I've used Colin for over 20 listings and he never misses. My go-to photographer in Phoenix.",
-    stars: 5,
+    headline: '20+ listings and he never misses.',
+    quote: "Fast, professional, and the results speak for themselves. My go-to photographer in Phoenix.",
   },
   {
     name: 'Mark T.',
     role: 'Independent Agent',
-    quote: "The headshot session was so relaxed and fun. I finally have photos I'm proud to use on my website and cards. Highly recommend to any agent.",
-    stars: 5,
+    headline: "Photos I'm finally proud to use.",
+    quote: "The headshot session was so relaxed and fun. Highly recommend to any agent.",
   },
   {
     name: 'Priya S.',
     role: 'Team Lead, Keller Williams',
-    quote: "We hired Aota Media for our whole team's headshots and the logo redesign. The consistency and quality across everything was incredible. Our brand looks elite now.",
-    stars: 5,
+    headline: 'Our brand looks elite now.',
+    quote: "We hired Aota Media for our whole team's headshots and the logo redesign. The consistency and quality across everything was incredible.",
   },
 ]
-
-function StarRating({ count }) {
-  return (
-    <div className="flex gap-0.5 mb-4">
-      {Array.from({ length: count }).map((_, i) => (
-        <svg key={i} className="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20">
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-        </svg>
-      ))}
-    </div>
-  )
-}
 
 export default function Testimonials() {
   const scrollRef = useRef(null)
@@ -97,9 +85,11 @@ export default function Testimonials() {
                 key={i}
                 className="flex-none w-80 md:w-96 bg-white border border-border rounded-2xl p-8 snap-start hover:shadow-lg hover:border-gold/30 transition-all duration-300"
               >
-                <StarRating count={t.stars} />
+                <p className="font-display font-semibold text-text-primary text-lg leading-snug mb-3">
+                  "{t.headline}"
+                </p>
                 <blockquote className="font-body text-text-secondary text-sm leading-relaxed mb-6">
-                  "{t.quote}"
+                  {t.quote}
                 </blockquote>
                 <div>
                   <p className="font-body font-semibold text-text-primary text-sm">{t.name}</p>
