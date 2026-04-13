@@ -4,26 +4,43 @@ import { useScrollObserver } from '../hooks/useScrollObserver'
 const FILTERS = ['All', 'Photos', 'Videos']
 
 const portfolioItems = [
-  // Jordan Page — Photos
-  { id: 1,  type: 'photo', src: '/images/jordan-kitchen-1.jpg',  category: 'Photos', alt: 'Jordan Page kitchen' },
-  { id: 2,  type: 'photo', src: '/images/jordan-pool-sunset.jpg', category: 'Photos', alt: 'Jordan Page pool at sunset' },
-  { id: 3,  type: 'photo', src: '/images/jordan-living.jpg',      category: 'Photos', alt: 'Jordan Page living room' },
-  { id: 4,  type: 'photo', src: '/images/jordan-dining.jpg',      category: 'Photos', alt: 'Jordan Page dining room' },
-  { id: 5,  type: 'photo', src: '/images/jordan-kitchen-2.jpg',   category: 'Photos', alt: 'Jordan Page kitchen and dining' },
-  { id: 6,  type: 'photo', src: '/images/jordan-pool-2.jpg',      category: 'Photos', alt: 'Jordan Page pool view' },
-  { id: 7,  type: 'photo', src: '/images/jordan-patio-1.jpg',     category: 'Photos', alt: 'Jordan Page patio' },
-  { id: 8,  type: 'photo', src: '/images/jordan-patio-2.jpg',     category: 'Photos', alt: 'Jordan Page outdoor living' },
-  { id: 9,  type: 'photo', src: '/images/jordan-staircase.jpg',   category: 'Photos', alt: 'Jordan Page interior overview' },
-  { id: 10, type: 'photo', src: '/images/jordan-patio-3.jpg',     category: 'Photos', alt: 'Jordan Page backyard sunset' },
-  // Josh AirBnB — Photos
-  { id: 11, type: 'photo', src: '/images/josh-pool.jpg',          category: 'Photos', alt: 'Josh AirBnB pool at night' },
-  { id: 12, type: 'photo', src: '/images/josh-living-1.jpg',      category: 'Photos', alt: 'Josh AirBnB living room' },
-  { id: 13, type: 'photo', src: '/images/josh-living-2.jpg',      category: 'Photos', alt: 'Josh AirBnB fireplace' },
+  // Photos — real compressed files
+  { id: 1,  type: 'photo', src: '/images/_DSC2963-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 2,  type: 'photo', src: '/images/_DSC2969-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 3,  type: 'photo', src: '/images/_DSC2984-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 4,  type: 'photo', src: '/images/_DSC3008-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 5,  type: 'photo', src: '/images/_DSC3021-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 6,  type: 'photo', src: '/images/_DSC3155-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 7,  type: 'photo', src: '/images/_DSC3186-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 8,  type: 'photo', src: '/images/_DSC3253-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 9,  type: 'photo', src: '/images/_DSC3256-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 10, type: 'photo', src: '/images/_DSC3271-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 11, type: 'photo', src: '/images/_DSC3276-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 12, type: 'photo', src: '/images/_DSC3288-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 13, type: 'photo', src: '/images/_DSC5031-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 14, type: 'photo', src: '/images/_DSC5053-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 15, type: 'photo', src: '/images/_DSC5095-HDR.jpg', category: 'Photos', alt: 'Real estate photography' },
+  { id: 16, type: 'photo', src: '/images/_DSC5675.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 17, type: 'photo', src: '/images/_DSC5681.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 18, type: 'photo', src: '/images/_DSC5684.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 19, type: 'photo', src: '/images/_DSC5687.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 20, type: 'photo', src: '/images/_DSC9656.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 21, type: 'photo', src: '/images/_DSC9665.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 22, type: 'photo', src: '/images/_DSC9668.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 23, type: 'photo', src: '/images/_DSC9671.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 24, type: 'photo', src: '/images/_DSC9680.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 25, type: 'photo', src: '/images/_DSC9689.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 26, type: 'photo', src: '/images/_DSC9703.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 27, type: 'photo', src: '/images/_DSC9808.jpg',     category: 'Photos', alt: 'Real estate photography' },
+  { id: 28, type: 'photo', src: '/images/_DSC9841.jpg',     category: 'Photos', alt: 'Real estate photography' },
   // Videos
-  { id: 14, type: 'video', src: '/videos/main-reel.mp4',      poster: '/images/kitchen.jpg',           category: 'Videos', alt: 'Aota Media main showreel' },
-  { id: 15, type: 'video', src: '/videos/daniel-reel.mp4',    poster: '/images/josh-pool.jpg',         category: 'Videos', alt: 'Daniel property reel' },
-  { id: 16, type: 'video', src: '/videos/elizabeth-reel.mp4', poster: '/images/staircase.jpg',         category: 'Videos', alt: 'Elizabeth property reel' },
-  { id: 17, type: 'video', src: '/videos/2ahead.mp4',         poster: '/images/jordan-pool-sunset.jpg', category: 'Videos', alt: '2Ahead property showcase' },
+  { id: 29, type: 'video', src: '/videos/elizabeth-reel.mp4',   poster: '/images/thumb-elizabeth-reel.jpg', category: 'Videos', alt: 'Elizabeth property reel' },
+  { id: 30, type: 'video', src: '/videos/daniel-reel.mp4',      poster: '/images/thumb-daniel-reel.jpg',    category: 'Videos', alt: 'Daniel, Lauren, Monica & Jordan reel' },
+  { id: 31, type: 'video', src: '/videos/2ahead.mp4',           poster: '/images/thumb-2ahead.jpg',         category: 'Videos', alt: '2Ahead property showcase' },
+  { id: 32, type: 'video', src: '/videos/josh-main-reel.mp4',   poster: '/images/thumb-josh-main-reel.jpg', category: 'Videos', alt: 'Josh main reel' },
+  { id: 33, type: 'video', src: '/videos/josh-airbnb.mp4',      poster: '/images/thumb-josh-airbnb.jpg',    category: 'Videos', alt: 'Josh AirBnB showcase' },
+  { id: 34, type: 'video', src: '/videos/bre-reel.mp4',         poster: '/images/thumb-bre-reel.jpg',       category: 'Videos', alt: 'Bre reel' },
+  { id: 35, type: 'video', src: '/videos/jordan-page-reel.mp4', poster: '/images/thumb-jordan-page-reel.jpg', category: 'Videos', alt: 'Jordan Page reel' },
 ]
 
 const INITIAL_SHOW = 9
@@ -90,7 +107,6 @@ function LightboxModal({ item, index, total, onClose, onPrev, onNext }) {
         </svg>
       </button>
 
-      {/* Position counter */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/50 text-sm font-body tracking-widest">
         {index + 1} / {total}
       </div>
@@ -120,7 +136,6 @@ export default function Portfolio() {
   return (
     <section id="portfolio" className="py-24 px-6 bg-bg-warm">
       <div className="max-w-7xl mx-auto">
-        {/* Left-aligned — no eyebrow, confident display heading */}
         <div ref={sectionRef} className="fade-up mb-12">
           <h2 className="font-display font-semibold text-5xl md:text-7xl text-text-primary leading-none mb-4">
             Our Work
@@ -130,7 +145,6 @@ export default function Portfolio() {
           </p>
         </div>
 
-        {/* Filter tabs — left-aligned to match header */}
         <div className="flex flex-wrap gap-3 mb-10">
           {FILTERS.map((filter) => (
             <button
@@ -147,7 +161,6 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* Masonry grid */}
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           {visible.map((item) => (
             <div
@@ -158,8 +171,7 @@ export default function Portfolio() {
               <img
                 src={item.type === 'video' ? item.poster : item.src}
                 alt={item.alt}
-                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                className="w-full block"
               />
 
               {/* Hover overlay */}
@@ -178,7 +190,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Video badge — always visible */}
+              {/* Video badge */}
               {item.type === 'video' && (
                 <span className="absolute bottom-3 left-3 bg-black/65 text-white text-xs font-body font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
                   <svg className="w-3 h-3 flex-shrink-0" viewBox="0 0 12 12" fill="currentColor">
@@ -191,7 +203,6 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* View More */}
         {filtered.length > INITIAL_SHOW && (
           <div className="text-center mt-12">
             <button
@@ -204,7 +215,6 @@ export default function Portfolio() {
         )}
       </div>
 
-      {/* Lightbox */}
       {lightbox !== null && (
         <LightboxModal
           item={filtered[lightbox]}
